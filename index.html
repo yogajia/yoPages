@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            margin: 30px 0;
+            line-height: 1.8;
+        }
+
+        .music-player {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .music-player h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1em;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        input[type="range"] {
+            flex: 1;
+            min-width: 150px;
+            height: 6px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0f3460;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #0f3460;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            border: none;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .volume-control span:first-child {
+            font-size: 0.9em;
+        }
+
+        #volumeControl {
+            width: 100px;
+        }
+
+        #volumeValue {
+            font-size: 0.85em;
+            min-width: 35px;
+        }
+
+        .music-info {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 0.85em;
+            line-height: 1.6;
+        }
+
+        .music-info code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .music-player {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .player-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #volumeControl {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌟 欢迎来到我的个人空间</h1>
+            <p class="subtitle">Welcome to My Personal Website</p>
+        </header>
+
+        <div class="content">
+            <p>你好！这是我的个人网站首页。在这里你可以了解更多关于我的信息，欣赏音乐，探索我的作品和想法。</p>
+        </div>
+
+        <div class="music-player">
+            <h3>🎵 背景音乐</h3>
+            
+            <div class="player-controls">
+                <button id="playPauseBtn">▶️ 播放</button>
+                
+                <div class="volume-control">
+                    <span>🔊</span>
+                    <input type="range" id="volumeControl" min="0" max="100" value="50">
+                    <span id="volumeValue">50%</span>
+                </div>
+            </div>
+
+            <audio id="audioPlayer" loop>
+                <source id="audioSource" src="" type="audio/mpeg">
+                您的浏览器不支持音频播放。
+            </audio>
+        </div>
+
+        <div class="music-info">
+            <p>💡 <strong>修改音乐文件：</strong></p>
+            <p>1. 在项目根目录创建 <code>music</code> 文件夹</p>
+            <p>2. 将音乐文件放入 <code>music</code> 文件夹（如 <code>music/song.mp3</code>）</p>
+            <p>3. 修改下方第 244 行代码：<code>const audioSrc = 'music/song.mp3';</code></p>
+        </div>
+
+        <div class="links">
+            <a href="#about">关于我</a>
+            <a href="#projects">我的项目</a>
+            <a href="#contact">联系方式</a>
+            <a href="https://github.com" target="_blank">GitHub</a>
+        </div>
+    </div>
+
+    <script>
+        // 配置：修改这里的路径来更换音乐
+        const audioSrc = 'music/song.mp3'; // 格式：'music/你的音乐文件名.mp3'
+        
+        const audio = document.getElementById('audioPlayer');
+        const audioSource = document.getElementById('audioSource');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const volumeControl = document.getElementById('volumeControl');
+        const volumeValue = document.getElementById('volumeValue');
+
+        // 设置音乐源
+        audioSource.src = audioSrc;
+        audio.load();
+
+        // 设置初始音量
+        audio.volume = 0.5;
+
+        // 播放/暂停切换按钮
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().catch(err => {
+                    alert('播放失败，请确保音乐文件路径正确：' + audioSrc);
+                    console.error('播放错误:', err);
+                });
+                playPauseBtn.textContent = '⏸️ 暂停';
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = '▶️ 播放';
+            }
+        });
+
+        // 音乐结束或暂停时更新按钮文字
+        audio.addEventListener('pause', () => {
+            playPauseBtn.textContent = '▶️ 播放';
+        });
+
+        audio.addEventListener('play', () => {
+            playPauseBtn.textContent = '⏸️ 暂停';
+        });
+
+        // 音量控制
+        volumeControl.addEventListener('input', (e) => {
+            const volume = e.target.value;
+            audio.volume = volume / 100;
+            volumeValue.textContent = volume + '%';
+        });
+
+        // 空格键快捷键
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                playPauseBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
